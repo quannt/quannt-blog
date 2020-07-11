@@ -6,13 +6,29 @@ const shouldAnalyseBundle = process.env.ANALYSE_BUNDLE
 
 module.exports = {
   siteMetadata: {
-    siteTitleAlt: `Minimal Blog - Gatsby Theme`,
+    // Used for the title template on pages other than the index site
+    siteTitle: `Quannt's Technical Blog`,
+    // Default title of the page
+    siteTitleAlt: `Quannt's Technical Blog`,
+    // Can be used for e.g. JSONLD
+    siteHeadline: `Quannt's Technical Blog`,
+    // Will be used to generate absolute URLs for og:image etc.
+    siteUrl: ``,
+    // Used for SEO
+    siteDescription: `Quannt's Technical Blog`,
+    // Will be set on the <html /> tag
+    siteLanguage: `en`,
+    // Used for og:image and must be placed inside the `static` folder
+    siteImage: ``,
+    // Twitter Handle
+    author: `@quannt91`,
   },
   plugins: [
     {
       resolve: `@lekoarts/gatsby-theme-minimal-blog`,
       // See the theme's README for all available options
       options: {
+        feedTitle: `Quannt's Technical Blog`,
         navigation: [
           {
             title: `Blog`,
@@ -21,17 +37,25 @@ module.exports = {
           {
             title: `About`,
             slug: `/about`,
-          },
+          }
         ],
         externalLinks: [
           {
-            name: `Twitter`,
-            url: `https://twitter.com/lekoarts_de`,
+            name: `Notes`,
+            url: 'https://www.notion.so/quannt/d4438f7d63a046969e76419cdb68d134?v=c353e45ea2044ea088292ce45c88fe6e'
           },
           {
-            name: `Instagram`,
-            url: `https://www.instagram.com/lekoarts.de/`,
+            name: `Twitter`,
+            url: `https://twitter.com/quannt91`,
           },
+          {
+            name: `Online CV`,
+            url: `https://stackoverflow.com/story/quannt`,
+          },
+          {
+            name: 'Linkedin',
+            url: `https://www.linkedin.com/in/ngo-tung-quan/`
+          }
         ],
       },
     },
@@ -45,9 +69,9 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `minimal-blog - @lekoarts/gatsby-theme-minimal-blog`,
-        short_name: `minimal-blog`,
-        description: `Typography driven, feature-rich blogging theme with minimal aesthetics. Includes tags/categories support and extensive features for code blocks such as live preview, line numbers, and code highlighting.`,
+        name: `Quannt's Technical Blog`,
+        short_name: `quannt`,
+        description: `Quannt's Technical Blog`,
         start_url: `/`,
         background_color: `#fff`,
         theme_color: `#6B46C1`,
