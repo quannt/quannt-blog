@@ -13,7 +13,7 @@ module.exports = {
     // Can be used for e.g. JSONLD
     siteHeadline: `Quannt's Technical Blog`,
     // Will be used to generate absolute URLs for og:image etc.
-    siteUrl: ``,
+    siteUrl: `https://quannt.github.io`,
     // Used for SEO
     siteDescription: `Quannt's Technical Blog`,
     // Will be set on the <html /> tag
