@@ -45,6 +45,10 @@ module.exports = {
             url: 'https://www.notion.so/quannt/d4438f7d63a046969e76419cdb68d134?v=c353e45ea2044ea088292ce45c88fe6e'
           },
           {
+            name: `Github`,
+            url: 'https://github.com/quannt'
+          },
+          {
             name: `Twitter`,
             url: `https://twitter.com/quannt91`,
           },
