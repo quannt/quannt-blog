@@ -5,6 +5,9 @@ description: The fastest request is the one that is never sent.
 tags:
   - web performance
   - web dev
+banner: ./http-header.png
+canonicalUrl: https://www.quannt.xyz/http-header
+slug: "/http-header"
 ---
 
 Mục tiêu: tăng tốc độ trang web, bằng cách giảm thiểu số lượng request từ browser đến server thông qua việc cache resource html, js, css, image... (từ giờ đến cuối bài viết gọi chung là resource) tại browser bằng Header.
@@ -13,21 +16,25 @@ Các Header cần chú ý:  Combo **ETag** + **If-None-Match** và **Cache-Contr
 
 ### ETag và If-None-Match
 Cách thức hoạt động thường gặp: 
+
 1) Browser muốn tải file js tại địa chỉ example.com/test.js
-1) Server trả về file test.js, kèm theo Header **ETag** có nội dung *x234dff* . 
-2) Browser tải file test.js về và sử dụng.
 
-![alt text](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/mxohnjsajo_etag1.png)
-*image from Google Web Fundamental series*
+2) Server trả về file test.js, kèm theo Header **ETag** có nội dung *x234dff* . 
 
-3) Browser muốn tải lại test.js ở 1 màn hình khác, phát hiện bản test.js được cache đã hết hạn (bằng cách đọc **Cache-Control** của file, sẽ giải thích ở dưới).
-4) Browser tải file từ example.com/test.js và gửi kèm Header **If-None-Match** với nội dung *x234dff* .
+3) Browser tải file test.js về và sử dụng.
+
+![Image that shows how E-Tag works](./etag1.png)
+
+4) Browser muốn tải lại test.js ở 1 màn hình khác, phát hiện bản test.js được cache đã hết hạn (bằng cách đọc **Cache-Control** của file, sẽ giải thích ở dưới).
+
+5) Browser tải file từ example.com/test.js và gửi kèm Header **If-None-Match** với nội dung *x234dff* .
+
 5a) Server đọc **If-None-Match** và lấy được value *x234dff*  và thấy rằng file test.js không có thay đổi gì, gửi lại response với Header status code 304 Not Modified, **ETag** *x234dff*, thay vì gửi lại toàn bộ file test.js.
 
-![alt text](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/ciwr2atsvi_etag2.png)
-*image from Google Web Fundamental series*
+![Image that shows how E-Tag works part 2](./etag2.png)
 
 5b) Server đọc **If-None-Match** và lấy được value *x234dff*  và thấy rằng file test.js đã thay đổi, server tính toán để có token mới và gửi lại browser file test.js mới kèm theo token mới trong **ETag**
+
 6) Quay lại bước 2.
 
 
@@ -53,8 +60,7 @@ Resource có thể được cache tại browser cache nhưng không thể cache 
 
 Use case
 
-![alt text](https://s3-ap-southeast-1.amazonaws.com/kipalog.com/blg71r4q6p_http-cache-decision-tree.png)
-*image from Google Web Fundamental series*
+![Image that shows the decision tree of http cache policy](./http-cache-decision-tree.png)
 
 
 * Resource nhạy cảm, thay đổi nhiều và không nên cache (ví dụ trang html của website i-banking): `Cache-Control: no-store`
