@@ -19,9 +19,9 @@ module.exports = {
     // Will be set on the <html /> tag
     siteLanguage: `en`,
     // Used for og:image and must be placed inside the `static` folder
-    siteImage: ``,
+    siteImage: `/banner.png`,
     // Twitter Handle
-    author: `@quannt91`,
+    author: `@quannt91` ,
   },
   plugins: [
     {
@@ -41,8 +41,8 @@ module.exports = {
         ],
         externalLinks: [
           {
-            name: `Notes`,
-            url: 'https://www.notion.so/quannt/d4438f7d63a046969e76419cdb68d134?v=c353e45ea2044ea088292ce45c88fe6e'
+            name: `SpeakerDeck`,
+            url: 'http://speakerdeck.com/quannt/'
           },
           {
             name: `Github`,
@@ -53,7 +53,7 @@ module.exports = {
             url: `https://twitter.com/quannt91`,
           },
           {
-            name: `Online CV`,
+            name: `CV`,
             url: `https://stackoverflow.com/story/quannt`,
           },
           {
@@ -103,6 +103,6 @@ module.exports = {
         reportFilename: `_bundle.html`,
         openAnalyzer: false,
       },
-    },
+    }
   ].filter(Boolean),
 }
