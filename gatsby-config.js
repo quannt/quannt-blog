@@ -21,7 +21,7 @@ module.exports = {
     // Used for og:image and must be placed inside the `static` folder
     siteImage: `/banner.png`,
     // Twitter Handle
-    author: `@quannt91`,
+    author: `@quannt91` ,
   },
   plugins: [
     {
@@ -102,15 +102,6 @@ module.exports = {
         analyzerMode: `static`,
         reportFilename: `_bundle.html`,
         openAnalyzer: false,
-      },
-    },
-    {
-      resolve: 'gatsby-source-notionso',
-      options: {
-        name: 'Blog',
-        rootPageUrl:
-          'https://www.notion.so/quannt/Blogs-37400af819bb4b12a06998dfab109fd8',
-        debug: false,
       },
     }
   ].filter(Boolean),
