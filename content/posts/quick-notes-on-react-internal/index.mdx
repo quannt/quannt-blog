@@ -8,7 +8,15 @@ banner: ./banner.png
 canonicalUrl: https://www.quannt.xyz/react-internal-notes
 ---
 
-1. Convert JSX to an object (using Babel and a method called React.creatElement).
+Given this block of React codebase
+
+```jsx
+const element = <h1 title="foo">Hello</h1>
+const container = document.getElementById("root")
+ReactDOM.render(element, container)
+```
+
+Step 1. Convert JSX to an object (using Babel and a method called React.creatElement).
 
     The result is an object that looks like this
 
@@ -20,57 +28,46 @@ canonicalUrl: https://www.quannt.xyz/react-internal-notes
         children: "Hello",
       },
     }
-    ```1. Convert JSX to an object (using Babel and a method called React.creatElement).
 
-    The result is an object that looks like this
+Step 2. The `element` object will then be passed to `render`.
 
-    ```jsx
-    const element = {
-      type: "h1",
-      props: {
-        title: "foo",
-        children: "Hello",
-      },
-    }
-    ```
-
-2. The `element` will then be passed to `render`.
-3. The render method recursively creates DOM nodes for the `element` and its `children`.
+Step 3. The render method recursively creates DOM nodes for the `element` and its `children`.
     1. The whole process will be done in multiple batches to avoid hogging the main thread. [https://github.com/facebook/react/issues/11171#issuecomment-417349573](https://github.com/facebook/react/issues/11171#issuecomment-417349573). (aka Concurrent mode)
     2. The data structure behind the scene that stores all the "batches" is called a Fiber tree.
 
-4. Once the DOM tree is ready, it's committed to the real DOM. The Fiber tree will also be kept as a reference for the next step.
-5. On subsequent updates, steps 1 to 3 are repeated again, the new Fiber tree will then be compared with the existing Fiber (this process is called Reconciliation [https://reactjs.org/docs/reconciliation.html](https://reactjs.org/docs/reconciliation.html)), the differences will be committed to the DOM.
+Step 4. Once the DOM tree is ready, it's committed to the real DOM. The Fiber tree will also be kept as a reference for the next step.
+
+Step 5. On subsequent updates, steps 1 to 3 are repeated again, the new Fiber tree will then be compared with the existing Fiber (this process is called Reconciliation [https://reactjs.org/docs/reconciliation.html](https://reactjs.org/docs/reconciliation.html)), the differences will be committed to the DOM.
 
 
-More resources
+# More resources
 
-[Building a Custom React Renderer | Sophie Alpert](https://www.youtube.com/watch?v=CGpMlWVcHok)
+* [Building a Custom React Renderer | Sophie Alpert](https://www.youtube.com/watch?v=CGpMlWVcHok)
 
-[Paul O Shannessy - Building React From Scratch](https://www.youtube.com/watch?v=_MAD4Oly9yg)
+*[Paul O Shannessy - Building React From Scratch](https://www.youtube.com/watch?v=_MAD4Oly9yg)
 
-[⚛️👆 Part 1/3 - Beginners guide to Custom React Renderers. How to build your own renderer from scratch?](https://blog.atulr.com/react-custom-renderer-1/)
+*[⚛️👆 Part 1/3 - Beginners guide to Custom React Renderers. How to build your own renderer from scratch?](https://blog.atulr.com/react-custom-renderer-1/)
 
-[nitin42/Making-a-custom-React-renderer](https://github.com/nitin42/Making-a-custom-React-renderer)
+*[nitin42/Making-a-custom-React-renderer](https://github.com/nitin42/Making-a-custom-React-renderer)
 
-[iamdustan/tiny-react-renderer](https://github.com/iamdustan/tiny-react-renderer)
+*[iamdustan/tiny-react-renderer](https://github.com/iamdustan/tiny-react-renderer)
 
-[Codebase Overview - React](https://reactjs.org/docs/codebase-overview.html)
+*[Codebase Overview - React](https://reactjs.org/docs/codebase-overview.html)
 
-[React Components, Elements, and Instances - React Blog](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
+*[React Components, Elements, and Instances - React Blog](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
 
-[React is also the LLVM for creating declarative UI frameworks](https://medium.com/@agent_hunt/react-is-also-the-llvm-for-creating-declarative-ui-frameworks-767e75ce1d6a)
+*[React is also the LLVM for creating declarative UI frameworks](https://medium.com/@agent_hunt/react-is-also-the-llvm-for-creating-declarative-ui-frameworks-767e75ce1d6a)
 
-[chentsulin/awesome-react-renderer](https://github.com/chentsulin/awesome-react-renderer)
+*[chentsulin/awesome-react-renderer](https://github.com/chentsulin/awesome-react-renderer)
 
-[Vue 3 Overview - Vue 3 Deep Dive with Evan You | Vue Mastery](https://www.vuemastery.com/courses/vue3-deep-dive-with-evan-you/vue3-overview)
+*[Vue 3 Overview - Vue 3 Deep Dive with Evan You | Vue Mastery](https://www.vuemastery.com/courses/vue3-deep-dive-with-evan-you/vue3-overview)
 
-[acdlite/react-fiber-architecture](https://github.com/acdlite/react-fiber-architecture)
+*[acdlite/react-fiber-architecture](https://github.com/acdlite/react-fiber-architecture)
 
-[eggheadTalks: Concurrent React from Scratch](https://egghead.io/lessons/react-eggheadtalks-concurrent-react-from-scratch)
+*[eggheadTalks: Concurrent React from Scratch](https://egghead.io/lessons/react-eggheadtalks-concurrent-react-from-scratch)
 
-[swyx Speaking | Getting Closure on Hooks (JSConf Edition)](https://www.swyx.io/speaking/react-hooks/)
+*[swyx Speaking | Getting Closure on Hooks (JSConf Edition)](https://www.swyx.io/speaking/react-hooks/)
 
-[Deep dive: How do React hooks really work? | Netlify](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/)
+*[Deep dive: How do React hooks really work? | Netlify](https://www.netlify.com/blog/2019/03/11/deep-dive-how-do-react-hooks-really-work/)
 
-[Build your own React](https://pomb.us/build-your-own-react/)
+*[Build your own React](https://pomb.us/build-your-own-react/)
