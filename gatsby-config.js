@@ -53,12 +53,12 @@ module.exports = {
             url: `https://twitter.com/quannt91`,
           },
           {
-            name: `CV`,
-            url: `https://stackoverflow.com/story/quannt`,
+            name: `Portfolio`,
+            url: `https://quannt.notion.site/Portfolio-Ngo-Tung-Quan-0ec7ff86cfea4962983a9ad4dcfe25e8`,
           },
           {
             name: 'Linkedin',
-            url: `https://www.linkedin.com/in/ngo-tung-quan/`
+            url: `www.linkedin.com/in/ngo-tung-quan`
           }
         ],
       },
