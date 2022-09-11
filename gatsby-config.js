@@ -54,7 +54,7 @@ module.exports = {
           },
           {
             name: `Portfolio`,
-            url: `https://quannt.notion.site/Portfolio-Ngo-Tung-Quan-0ec7ff86cfea4962983a9ad4dcfe25e8`,
+            url: `https://quannt.notion.site/quannt-s-Portfolio-857f8a1d10e742d4aa70b9f381aa5889`,
           },
           {
             name: 'Linkedin',
