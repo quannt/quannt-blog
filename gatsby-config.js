@@ -58,7 +58,7 @@ module.exports = {
           },
           {
             name: 'Linkedin',
-            url: `www.linkedin.com/in/ngo-tung-quan`
+            url: `https://www.linkedin.com/in/ngo-tung-quan`
           }
         ],
       },
