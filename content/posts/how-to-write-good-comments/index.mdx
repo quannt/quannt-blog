@@ -1,0 +1,109 @@
+---
+title: How to write good comments
+date: 2021-12-07
+description:
+tags:
+  - software
+banner: ./banner.png
+canonicalUrl: https://www.quannt.xyz/good-comments
+---
+
+Why write comments
+
+- "But my code is perfect", no.
+- Provide contexts, the whats, the whys, abstractions, and public interfaces for the code.
+
+> “comments should describe things that aren’t obvious from the code.”
+> “Developers should be able to understand the abstraction provided by a module without reading any code other than its externally visible declarations”
+
+
+*Excerpt From: John Ousterhout. “A Philosophy of Software Design.”*
+
+
+Types of comments
+
+1. Lower-level comments that add precision to the code.
+
+```c
+//  Position in this buffer of the first object that hasn't
+//  been returned to the client.
+uint32_t offset;
+//  Holds statistics about line lengths of the form <length, count>
+//  where length is the number of characters in a line (including
+//  the newline), and count is the number of lines with
+//  exactly that many characters. If there are no lines with
+//  a particular length, then there is no entry for that length.
+private TreeMap<Integer, Integer> numLinesWithLength;
+```
+
+2. Higher-level comments that add high-level information to the code. Good comments answer these questions: what is it that the code trying to achieve here? What's the most important thing about this code? 
+
+```c
+// Try to append the current key hash onto an existing
+// RPC to the desired server that hasn't been sent yet.”
+int readActiveRpcId = RPC_ID_NOT_ASSIGNED;
+for (int i = 0; i < NUM_READ_RPC; i++) {
+      if (session == readRpc[i].session
+                 && readRpc[i].status == LOADING
+                 && readRpc[i].maxPos < assignPos
+                 && readRpc[i].numHashes < MAX_PKHASHES_PERRPC) {
+          readActiveRpcId = i;
+          break;
+      }
+}
+```
+
+3. Interface-level comments define the public contract of the code without telling the implementation details.
+
+Bad example
+
+```c
+/* This class implements the client side framework for index range
+ * lookups. It manages a single LookupIndexKeys RPC and multiple
+ * IndexedRead RPCs. Client side just includes "IndexLookup.h" in
+ * its header to use IndexLookup class. Several parameters can be set
+ * in the config below:
+ * - The number of concurrent indexedRead RPCs
+ * - The max number of PKHashes a indexedRead RPC can hold at a time
+ * - The size of the active PKHashes
+ *
+ * To use IndexLookup, the client creates an object of this class by
+ * providing all necessary information. After construction of
+ * IndexLookup, client can call getNext() function to move to next
+ * available object. If getNext() returns NULL, it means we reached
+ * the last object. Client can use getKey, getKeyLength, getValue,
+ * and getValueLength to get object data of current object.
+ */
+```
+
+Good example
+
+```c
+/*
+ * This class is used by client applications to make range queries
+ * using indexes. Each instance represents a single range query.
+ *
+ * To start a range query, a client creates an instance of this
+ * class. The client can then call getNext() to retrieve the objects
+ * in the desired range. For each object returned by getNext(), the
+ * caller can invoke getKey(), getKeyLength(), getValue(), and
+ * getValueLength() to get information about that object.
+ *
+ * \param offset
+ *        Index within the buffer of the first byte to copy.
+ * \param length
+ *        Number of bytes to copy.
+ * \param dest
+ *        Where to copy the bytes: must have room for at least
+ *        length bytes.
+ *
+ * \return
+ *        The return value is the actual number of bytes copied,
+ *        which may be less than length if the requested range of
+ *        bytes extends past the end of the buffer. 0 is returned
+ *        if there is no overlap between the requested range and
+ *        the actual buffer.
+ */
+```
+
+*Excerpt From: John Ousterhout. “A Philosophy of Software Design.”*
