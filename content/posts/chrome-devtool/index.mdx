@@ -11,11 +11,11 @@ slug: "/chrome-devtool"
 ![A computer from the 90s, the screen of the computer is showing a modern web application, say Bing or Google's home page, and a F1 racing car in the style of vaporwave](./f4.jpeg)
 Gần đây có một số bạn nhắn tin hỏi mình cách đo runtime performance bằng Chrome DevTools, thấy trên mạng cũng có nhiều bài hướng dẫn nhưng đa số là đã outdated và viết cho các phiên bản Chrome cũ, nay mình sẽ viết một bài mới dùng Chrome bản mới nhất (108.0.5359.124). Lưu ý là bạn nên hiểu qua về cách browser hoạt động và render thì mới thấy bài viết này có tác dụng được, có thể đọc [bài viết này](https://web.dev/rendering-performance/) để biết thêm chi tiết. Ok chúng ta bắt đầu.
 
-Việc đầu tiên là mở Incognito mode, mở Devtools, ấn vào tab Performance, ở ví dụ này chúng ta sẽ dùng https://googlechrome.github.io/devtools-samples/jank/ làm ví dụ (hoặc các bạn có thể tải file example01.json đính kèm), sau đó ấn vào nút tròn để bắt đầu Record, sau đó quay lại trang web và thực hiện vài thao tác bạn đang nghi ngờ có performance kém, xong xuôi thì ấn stop, sẽ thấy màn hình kết quả như dưới:
+Việc đầu tiên là mở Incognito mode, mở Devtools, ấn vào tab Performance, ở ví dụ này chúng ta sẽ dùng https://googlechrome.github.io/devtools-samples/jank/ làm ví dụ, sau đó ấn vào nút tròn để bắt đầu Record, sau đó quay lại trang web và thực hiện vài thao tác bạn đang nghi ngờ có performance kém, xong xuôi thì ấn stop, sẽ thấy màn hình kết quả như dưới:
 
 ![1](./1.png)
 
-Thoạt nhìn sẽ thấy rất choáng ngợp vì quá nhiều thông tin được hiển thị, không sao, chúng ta sẽ chỉ quan tâm đến phần nào dễ thôi :yaomin:. Như đã đánh dấu trên hình, khung đầu tiên hiển thị performance của CPU bằng area chart, màu vàng là scripting (JS), màu tím là rendering (Style, Layout), màu xanh là painting (Paint, Composite). Nhìn qua ảnh ở trên thì các bạn có thể thấy ngay phần lớn cái area chart là màu tím, vậy suy ra phần đang ảnh có ảnh hưởng nhất là rendering (Style, Layout).
+Thoạt nhìn sẽ thấy rất choáng ngợp vì quá nhiều thông tin được hiển thị, không sao, chúng ta sẽ chỉ quan tâm đến phần nào dễ thôi. Như đã đánh dấu trên hình, khung đầu tiên hiển thị performance của CPU bằng area chart, màu vàng là scripting (JS), màu tím là rendering (Style, Layout), màu xanh là painting (Paint, Composite). Nhìn qua ảnh ở trên thì các bạn có thể thấy ngay phần lớn cái area chart là màu tím, vậy suy ra phần đang ảnh có ảnh hưởng nhất là rendering (Style, Layout).
 
 Ngoài ra, các bạn cũng cần để ý đường màu đỏ, đó là những lúc FPS drop khá nhiều và sẽ ảnh hưởng đến UX.
 
@@ -27,7 +27,7 @@ Bước tiếp theo thì đơn giản thôi, click vào 1 trong 3 cái menu ở 
 
 ![3](./3.png)
 
-Ok vậy là các bạn đã có thể nắm sơ qua về phần CPU và Main thread cũng như phần Summary của tab Performance, mình sẽ đưa nốt một ví dụ để các bạn hiểu về phần Frame, lần này chúng ta sẽ dùng http://output.jsbin.com/woyoce/1/quiet hoặc các bạn có thể tải file [example02.json](./media/29/example02.json) lên rồi làm theo. Đến đây thì các bạn sẽ tự hỏi tại sao phần CPU ở đây trong lại khác thế, câu trả lời là ... mình cũng không biết, but anyway, nếu zoom in vào phần màu đỏ, sẽ thấy được rất nhiều frame bị drop, dẫn đến tình trạng giật lag:
+Ok vậy là các bạn đã có thể nắm sơ qua về phần CPU và Main thread cũng như phần Summary của tab Performance, mình sẽ đưa nốt một ví dụ để các bạn hiểu về phần Frame, lần này chúng ta sẽ dùng http://output.jsbin.com/woyoce/1/quiet. Đến đây thì các bạn sẽ tự hỏi tại sao phần CPU ở đây trong lại khác thế, câu trả lời là ... mình cũng không biết, but anyway, nếu zoom in vào phần màu đỏ, sẽ thấy được rất nhiều frame bị drop, dẫn đến tình trạng giật lag:
 
 ![4](./4.png)
 ![5](./5.png)
